@@ -1,0 +1,85 @@
+<html lang="en">
+
+<head>
+  <title>Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- css  -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@v0.74.0/dist/L.Control.Locate.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="../static/css/main.css">
+
+  <!-- bootstrap -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+  <!-- jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+  <!-- leaflet js -->
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('#search_district_id').change(function () {
+        $.post("/get_gewog", {
+          district_id: $('#search_district_id').val(),
+        }, function (gewog) {
+          $('#show_subdistricts').html(gewog);
+          $('#show_subdistricts').append(gewog.htmlresponse);
+        });
+        return false;
+      });
+    }); 
+  </script>
+  <script>
+    
+  </script>
+</head>
+
+<body>
+  <div class="w3-top">
+    <div class="w3-bar w3-black w3-card">
+      <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)"
+        onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+        <a href="index" class="w3-bar-item w3-button w3-padding-large w3-hide-small">HOME</a>
+        <a href="district" class="w3-bar-item w3-button w3-padding-large">Search Thram</a>
+      <a href="plotid" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Search Plot ID</a>
+      
+    </div> 
+    
+  </div>
+</div>
+
+  <!-- Page content -->
+  <!-- The Selection Option Section -->
+  <div id="relative" style="margin-top:46px">
+    <div class="col-lg-6">
+      <h3>Search your Map Sheet</h3>
+      <form action="#sheet" name="form" id="form" method="post">
+        <label>Select District</label>
+        <select name="search_district" id="search_district_id" class="form-control">
+          <option value="" selected="selected"></option>
+          {% for adzongkhag, adescr in edistricts %}
+          <option value='{{adzongkhag}}'>{{adescr}}</option>
+          {% endfor %}
+        </select>
+        <div id="show_subdistricts"></div>
+      </form>
+    </div>
+    <form>
+    <button id = "charts" style="display:none;" formaction="/map" onload ="map"> show chart </button>
+    </form>
+  </div>
+
+</body>
+</html>

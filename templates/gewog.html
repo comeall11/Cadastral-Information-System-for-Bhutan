@@ -1,0 +1,27 @@
+
+<script type="text/javascript">
+      $(document).ready(function () {
+            $('#search_gewog_id').change(function () {
+                  $.post("/get_thram", {
+                        gewog_id: $('#search_gewog_id option:selected').val(),
+                  }, function (tharm) {
+                        $('#show_thrams').html(tharm);
+                        $('#show_thrams').append(tharm.htmlresponse);
+                  });
+                  return false;
+            });
+      });
+
+</script>
+<form action="#sheet" name="form" id="form" method="post">
+      <div id = "show_subdistricts" class="form-group">
+            <label>Select Sub-district</label>
+            <select name="search_gewog" id="search_gewog_id" class="form-control">
+                  <option value="" selected="selected"></option>
+                  {% for subdistid,subdist in gewog %}
+                  <option value='{{subdistid}}'>{{subdist}}</option>
+                  {% endfor %}
+            </select>
+            <div id="show_thrams"></div>
+      </div>
+</form>

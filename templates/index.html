@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/python/css/report.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <style>
+    body {
+      font-family: "Lato", sans-serif
+    }
+
+    .mySlides {
+      display: none
+    }
+    /* Dropdown Button */
+    .dropbtn {
+      background-color: #04AA6D;
+      color: white;
+      min-width: 200px;
+      padding: 16px;
+      font-size: 16px;
+      border: none;
+      margin-top:40px;
+    }
+    
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f1f1f1;
+      min-width: 200px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    
+    /* Links inside the dropdown */
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {background-color: #ddd;}
+    
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {display: block;}
+    
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {background-color: #3e8e41;} 
+  </style>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('#search_category_id').change(function () {
+        $.post("/get_gewog", {
+          parent_id: $('#search_category_id').val(),
+        }, function (response) {
+          $('#show_sub_categories').html(response);
+          $('#show_sub_categories').append(response.htmlresponse);
+                  });
+        return false;
+      });
+         }); 
+  </script>
+</head>
+<body>
+  <!-- Navbar -->
+  <div class="w3-top">
+    <div class="w3-bar w3-black w3-card">
+      <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)"
+        onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+        <a href="index" class="w3-bar-item w3-button w3-padding-large w3-hide-small">HOME</a>
+        <a href="district" class="w3-bar-item w3-button w3-padding-large">Search Thram</a>
+      <a href="plotid" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Search Plot ID</a>
+      
+    </div> 
+    <p>&nbsp</p>
+    <div class="dropdown">
+      <button class="dropbtn">Reports</button>
+      <div class="dropdown-content">
+        <a href="thramchart">Thram Holder Districtwise</a>
+        <a href="landtypechart">Landtype Districtwise</a>
+        <a href="plotchart">Total Plots Districtwise</a>
+      </div>
+  </div>
+  </div>
+</div>
+  <!-- Page content -->
+  <div class="w3-content" style="max-width:2000px;margin-top:46px">
+    <!-- The Thram Section -->
+    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
+      
+      <div class="container">
+        <div class="row">
+          <!--<div class="col-lg-2"></div>-->
+          ><div class="col-lg-8">
+           <!--<h3 align="center">Python Flask Dynamic Loading of ComboBox using jQuery Ajax and Mysql</h3>-->
+            <form action="#" name="form" id="form" method="post">
+              <div class="form-group">
+                <img src="{{ user_image }}" alt="User Image">
+                <p>Copyright JKY</p>
+              </div>
+            </form>
+          </div>
+          <div class="col-lg-2"></div>
+        </div>
+      </div>
+
+</body>           
+  <!-- Image of welcome-->
+ 
+<!--  <video width="320" height="240" controls>
+    <source src="{{ user_image }}" alt="User Image">
+</video>
+<video width="320" height="240" controls>
+  <source src="{{url_for('static', filename='gloani.mov')}}" type="video">
+</video>-->
+
+</html>

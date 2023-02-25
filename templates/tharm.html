@@ -1,0 +1,26 @@
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#show_tharms_id').change(function () {
+            $.post("/plot_thram", {
+                tharm_id: $('#show_tharms_id option:selected').val(),
+            }, function (map) {
+                $('#map').html(map);
+                $('#map').append(map.htmlresponse);
+            });
+            return false;
+        });
+    });
+
+</script>
+<form action="#" name="form" id="form" method="post">
+    <div class="form-group">
+        <label>Select Thram</label>
+         <select name="search_tharm" id="show_tharms_id" class="form-control">
+            <option value="" selected="selected"></option>
+            {% for cgewog,cthram,cvillage in tharm %}
+            <option value="{{cthram}}">{{cthram}}" of "{{cvillage}}</option>
+            {% endfor %}
+        </select>
+    </div>
+</form>
+<div id="map">

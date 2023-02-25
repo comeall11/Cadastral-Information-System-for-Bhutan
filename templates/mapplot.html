@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../static/css/main.css">
+
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+    <!-- leaflet js -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+    <!-- Administrative Boundaries js -->
+    <script src="../static/data/country.js"></script>
+    <script src="../static/data/district.js"></script>
+    <script src="../static/data/subdistrict.js"></script>
+
+
+    <title>Map of Selected plot</title>
+    <h1> Map of Selected plot</h1>
+
+</head>
+
+<body>
+    <div>
+        <div id='mapplot'>
+
+            <script src="../static/js/main.js"></script>
+
+            </script>
+
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script type="text/javascript">
+        var geojson = JSON.parse('{{ data|safe }}');
+        var parcel = L.geoJSON(geojson).addTo(map);
+        var bnd_parcel = parcel.getBounds()
+        var center = bnd_parcel.getCenter();
+        var zoom = map.getBoundsZoom(bnd_parcel);
+        map.setView(center, zoom);
+    </script>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+
+  }
+</style>
+<head>
+  <title>Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/static/style.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <style>fgfg
+    body {
+      font-family: "Lato", sans-serif
+    }
+
+    .mySlides {
+      display: none
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <div class="w3-top">
+    <div class="w3-bar w3-black w3-card">
+      <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)"
+        onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+      <a href="#" class="w3-bar-item w3-button w3-padding-large">Search by Thram</a>
+      <a href="\plot.html" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Search by Plot ID</a>
+      <a href="#tour" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Report</a>
+
+    </div>
+
+  </div>
+  </div>
+
+  <!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) 
+  <div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+    <a href="#band" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Search by Thram</a>
+    <a href="#tour" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">TOUR</a>
+    <a href="#contact" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">CONTACT</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">MERCH</a>
+  </div>-->
+
+  <!-- Page content -->
+  <div class="w3-content" style="max-width:2000px;margin-top:46px">
+
+    <!-- Automatic Slideshow Images -->
+    <div class="mySlides w3-display-container w3-center">
+      <img src="/w3images/la.jpg" style="width:100%">
+      
+    </div>
+    <!-- The Thram Section -->
+    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
+      <div class="container">
+        <div class="row">
+          <!--<div class="col-lg-2"></div>-->
+          <div class="col-lg-8">
+           <!--{{ url_for('plot') }}  <h3 align="center">Python Flask Dynamic Loading of ComboBox using jQuery Ajax and Mysql</h3>-->
+          <form action="#" name="form" id="form" method="post">
+              <div id="plotid">
+                <label>Plot ID</label>
+                <input name="plot_id" id="plot_id"></input> 
+                <button type="submit" id="button" class="btn btn-primary">Search</button>
+              </div>
+              <div>
+                <p>&nbsp</p>
+              </div>
+              <div class="col-lg-2">
+                <div id="showthramnplot">
+                <div id="b">
+                  <button type="submit" id="button" class="btn btn-primary">PDF</button>
+
+                </div>
+              </div>  
+             
+            </form>
+          </div>
+           </div>
+        </div>
+      </div>
+     
+      <script type="text/javascript">
+        $(document).ready(function () {
+          $('#form').submit(function () {
+            console.log("submit")
+            $.post("/plot", {
+              plot_id: $('#plot_id').val(),
+            }, function (thramandplotdetails) {
+              let table = "<table><th>District</th><th>Sub District</th><th>Thram</th><th>CID</th><th>Owner name in English</th><th>Owner name in Dzongkha</th><th>Photo path</th><th>Owner Type</th><th>Village</th><th>Plot ID</th><th>Plot Name</th><th>Area in Acre</th><th>Land Type</th><tr></tr>"
+              for (let i = 0; i < thramandplotdetails[0].length-1; i++) 
+              {
+                table += "<td>" + thramandplotdetails[0][i] + "</td>"
+              }
+              table += "</table>"
+             // geojson = thramandplotdetails[0][thramandplotdetails.length-1]
+              
+              geojson = thramandplotdetails[0].length-1.
+
+             // document.write(geojson)
+              $("#showthramnplot").html(table)
+              });
+            return false;
+          });
+        }); 
+      </script>
+</body>
+</html>
