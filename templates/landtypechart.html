@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,79 +11,14 @@
   <link rel="stylesheet" href="/python/css/report.css">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+
   <!--js file for charts-->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  
+
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <style>
-    <title>Thram Holder Districtwise</title>
-
-    body {
-      font-family: "Lato", sans-serif
-    }
-
-    .mySlides {
-      display: none
-    }
-    /* Dropdown Button */
-    .dropbtn {
-      background-color: #04AA6D;
-      min-width: 200px;
-      color: white;
-      padding: 16px;
-      font-size: 16px;
-      border: none;
-      margin-top:40px;
-    }
-    
-    /* The container <div> - needed to position the dropdown content */
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-    
-    /* Dropdown Content (Hidden by Default) */
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #f1f1f1;
-      min-width: 200px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 1;
-    }
-    
-    /* Links inside the dropdown */
-    .dropdown-content a {
-      color: black;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-    }
-    
-    /* Change color of dropdown links on hover */
-    .dropdown-content a:hover {background-color: #ddd;}
-    
-    /* Show the dropdown menu on hover */
-    .dropdown:hover .dropdown-content {display: block;}
-    
-    /* Change the background color of the dropdown button when the dropdown content is shown */
-    .dropdown:hover .dropbtn {background-color: #3e8e41;} 
-  </style>
-
-  <script type="text/javascript">
-    $(document).ready(function () {
-      $('#search_category_id').change(function () {
-        $.post("/get_gewog", {
-          parent_id: $('#search_category_id').val(),
-        }, function (response) {
-          $('#show_sub_categories').html(response);
-          $('#show_sub_categories').append(response.htmlresponse);
-                  });
-        return false;
-      });
-         }); 
-  </script>
+  <link rel="stylesheet" type="text/css" media="screen" href="../static/css/index.css">
+  <title>Thram Holder Districtwise</title>
 </head>
 
 <body>
@@ -93,12 +27,11 @@
     <div class="w3-bar w3-black w3-card">
       <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)"
         onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-        <a href="index" class="w3-bar-item w3-button w3-padding-large w3-hide-small">HOME</a>
-        <a href="district" class="w3-bar-item w3-button w3-padding-large">Search Thram</a>
+      <a href="index" class="w3-bar-item w3-button w3-padding-large w3-hide-small">HOME</a>
+      <a href="district" class="w3-bar-item w3-button w3-padding-large">Search Thram</a>
       <a href="plotid" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Search Plot ID</a>
-      <!--<a href="#tour" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Report</a>-->
-      
-    </div> 
+
+    </div>
     <p>&nbsp</p>
     <div class="dropdown">
       <button class="dropbtn">Reports</button>
@@ -107,56 +40,48 @@
         <a href="landtypechart">Landtypewise Total Area</a>
         <a href="plotchart">Total Plots Districtwise</a>
       </div>
+    </div>
   </div>
   </div>
-</div>
-      
-  <!-- Page content -->
-  <div class="w3-content" style="max-width:2000px;margin-top:46px">
 
-    <!-- The Thram Section -->
-    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
-      <div class="container">
-        <div class="row">
-          <!--<div class="col-lg-2"></div>-->
-          ><div class="col-lg-8">
-           <!--<h3 align="center">Python Flask Dynamic Loading of ComboBox using jQuery Ajax and Mysql</h3>-->
-            <form action="#" name="form" id="form" method="post">
-              <div class="form-group">
-              </div>
-            </form>
-          </div>
-          <div class="col-lg-2"></div>
+  <!-- The Landtype Chart Section -->
+  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
+    <div class="container">
+      <div class="row">
+        <!--<div class="col-lg-2"></div>-->
+        ><div class="col-lg-8">
         </div>
       </div>
-      <div style="height: 60vh; width: 100%;">
-        <canvas id="myChart"></canvas>
     </div>
- <!-- Script for generating charts for Plots-->
+    <div style="height: 60vh; width: 100%;">
+      <canvas id="myChart"></canvas>
+    </div>
+
+    <!-- Script for generating charts for Plots-->
     <script>
-        const labels = {{ labels | tojson}};
- 
-        const data = {
-            labels: labels,
-            datasets: [{
-                label: 'Landtypewise Area',
-                backgroundColor: '#04AA6D',
-                borderColor: '#04AA6D',
-                data: {{ data | tojson}},
+      const labels = {{ labels | tojson}};
+
+      const data = {
+        labels: labels,
+        datasets: [{
+          label: 'Landtypewise Area',
+          backgroundColor: '#04AA6D',
+          borderColor: '#04AA6D',
+          data: {{ data | tojson}},
             }]
         };
- 
-        const config = {
-            type: 'bar',
-            data: data,
-            options: { maintainAspectRatio: false }
-        };
- 
-        const myChart = new Chart(
-            document.getElementById('myChart'),
-            config
-        );
- 
+
+      const config = {
+        type: 'bar',
+        data: data,
+        options: { maintainAspectRatio: false }
+      };
+
+      const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+      );
     </script>
 </body>
+
 </html>

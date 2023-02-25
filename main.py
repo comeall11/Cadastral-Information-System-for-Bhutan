@@ -11,7 +11,7 @@ def get_db_connection():
         host="localhost",
         database="esakor",
         user='postgres',
-        password='yeshey010')
+        password='1111')
     return conn
 
 # created app to point to plot html through server api
@@ -30,7 +30,7 @@ def get_plotid():
         "SELECT * FROM vthram WHERE eplotid = %s", [eplotid])
     plot = cur.fetchall()
     print(plot)
-    return jsonify(plot) 
+    return render_template('mapplot.html', data=plot)
 
 # Displaying Index welcome image app 
 image_folder = os.path.join('static', 'images')
@@ -39,20 +39,12 @@ app.config['UPLOAD_FOLDER'] = image_folder
 @app.route('/index')
 def show_index():
     full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'mainimage.jpeg')
-    return render_template("index.html", user_image = full_filename)
+    developer = os.path.join(app.config['UPLOAD_FOLDER'], 'developers.png')
+    return render_template("index.html", user_image = full_filename, developers = developer)
 
 #chart app for Thram holders
 @app.get('/thramchart')
 def homepage():     
-#db connector
-    def get_db_connection():
-        conn = psycopg2.connect(
-        host="localhost",
-        database="esakor",
-        user='postgres',
-        password='yeshey010')
-        return conn
-
     #engine = create_engine("postgresql:///?User=postgres&;Password=postgres&Database=esakor&Server=127.0.0.1&Port=5432")
     conn = get_db_connection()
     cur = conn.cursor()
@@ -80,19 +72,10 @@ def homepage():
 #chart app for Plot districtwise
 @app.get('/plotchart')
 def homepage1():     
-#db connector
-    def get_db_connection():
-        conn = psycopg2.connect(
-        host="localhost",
-        database="esakor",
-        user='postgres',
-        password='yeshey010')
-        return conn
-
     #engine = create_engine("postgresql:///?User=postgres&;Password=postgres&Database=esakor&Server=127.0.0.1&Port=5432")
     conn = get_db_connection()
     cur = conn.cursor()
-    df=cur.execute("SELECT adescr, sum(etosarea) FROM vthram group by adescr")
+    df=cur.execute("SELECT district, sum(plot_area) FROM vparcel group by district")
     print(df)
 
 # stroing into different ARRAY/ list for bargraphs
@@ -117,15 +100,6 @@ def homepage1():
 #chart app for Landtype
 @app.get('/landtypechart')
 def homepage2():     
-#db connector
-    def get_db_connection():
-        conn = psycopg2.connect(
-        host="localhost",
-        database="esakor",
-        user='postgres',
-        password='yeshey010')
-        return conn
-
     #engine = create_engine("postgresql:///?User=postgres&;Password=postgres&Database=esakor&Server=127.0.0.1&Port=5432")
     conn = get_db_connection()
     cur = conn.cursor()

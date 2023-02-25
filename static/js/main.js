@@ -49,7 +49,6 @@ var district = L.geoJSON(districtJSON, {
   }
 }).addTo(map);
 
-
 var country = L.geoJSON(countryJSON, {
   onEachFeature: function (feature, layer) {
     var label = L.marker(layer.getBounds().getCenter(), {
@@ -69,8 +68,6 @@ var country = L.geoJSON(countryJSON, {
     outerWidth: 0.2
   }
 }).addTo(map);
-
-
 
 baseLayer = {
   "Open Street Map": osm,
