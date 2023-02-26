@@ -3,10 +3,27 @@
         $('#show_tharms_id').change(function () {
             $.post("/plot_thram", {
                 tharm_id: $('#show_tharms_id option:selected').val(),
-            }, function (map) {
-                $('#map').html(map);
-                $('#map').append(map.htmlresponse);
-            });
+            }, function (res) {
+                if (polygonLayer) {
+                    map.removeLayer(polygonLayer)
+                }
+                var parcel = L.geoJSON(res, {
+                    onEachFeature: function (feature, layer) {
+                        layer.bindPopup(
+                            "<table><tr>" +
+                            "<td>District</td><td>" + feature.property.district + "</td>" +
+                            "</tr><tr>" +
+                            "<td>Plot ID</td><td>" + feature.property.plot_id + "</td>" +
+                            "</tr></table>"
+                        )
+                    }
+                }).addTo(map);
+                var bnd_parcel = parcel.getBounds()
+                var center = bnd_parcel.getCenter();
+                var zoom = map.getBoundsZoom(bnd_parcel);
+                polygonLayer = parcel;
+                map.setView(center, zoom);
+            })
             return false;
         });
     });
@@ -17,10 +34,9 @@
         <label>Select Thram</label>
         <select name="search_tharm" id="show_tharms_id" class="form-control">
             <option value="" selected="selected"></option>
-            {% for cgewog,cthram,cvillage in tharm %}
+            {% for cgewolg,cthram,cvillage in tharm %}
             <option value="{{cthram}}">{{cthram}}" of "{{cvillage}}</option>
             {% endfor %}
         </select>
     </div>
 </form>
-<div id="map"></div>

@@ -5,7 +5,9 @@ import psycopg2
 from flask import Flask, render_template, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
-#DB connection
+# DB connection
+
+
 def get_db_connection():
     conn = psycopg2.connect(
         host="localhost",
@@ -15,40 +17,50 @@ def get_db_connection():
     return conn
 
 # created app to point to plot html through server api
+
+
 @app.get('/plotid')
 def plot():
     return render_template('plot.html')
 
-#App for plotid post from the user end using plot.html
+# App for plotid post from the user end using plot.html
+
+
 @app.post('/plot')
 def get_plotid():
     conn = get_db_connection()
     cur = conn.cursor()
-    eplotid = request.form['plot_id'] # "NAJ-3101" 
+    eplotid = request.form['plot_id']  # "NAJ-3101"
     print(eplotid)
     cur.execute(
         "SELECT * FROM vthram WHERE eplotid = %s", [eplotid])
     plot = cur.fetchall()
     print(plot)
-    return render_template('mapplot.html', data=plot)
+    return render_template('map.html', data=plot)
 
-# Displaying Index welcome image app 
+
+# Displaying Index welcome image app
 image_folder = os.path.join('static', 'images')
 app.config['UPLOAD_FOLDER'] = image_folder
+
+
 @app.route('/')
 @app.route('/index')
 def show_index():
     full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'mainimage.jpeg')
     developer = os.path.join(app.config['UPLOAD_FOLDER'], 'developers.png')
-    return render_template("index.html", user_image = full_filename, developers = developer)
+    return render_template("index.html", user_image=full_filename, developers=developer)
 
-#chart app for Thram holders
+# chart app for Thram holders
+
+
 @app.get('/thramchart')
-def homepage():     
+def homepage():
     #engine = create_engine("postgresql:///?User=postgres&;Password=postgres&Database=esakor&Server=127.0.0.1&Port=5432")
     conn = get_db_connection()
     cur = conn.cursor()
-    df=cur.execute("SELECT adescr, count(cthram) FROM vthram group by adescr")
+    df = cur.execute(
+        "SELECT adescr, count(cthram) FROM vthram group by adescr")
     print(df)
 
 # stroing into different ARRAY/ list for bargraphs
@@ -58,74 +70,78 @@ def homepage():
     for i in cur:
         District.append(i[0])
         Thrams.append(i[1])
-	
+
     print("Name of District = ", District)
     print("Number of Thrams = ", Thrams)
 
-	# Return the components to the HTML template
+    # Return the components to the HTML template
     return render_template(
-		template_name_or_list='thramchart.html',
-		data=Thrams,
-		labels=District,
-	)
+        template_name_or_list='thramchart.html',
+        data=Thrams,
+        labels=District,
+    )
 
-#chart app for Plot districtwise
+# chart app for Plot districtwise
+
+
 @app.get('/plotchart')
-def homepage1():     
+def homepage1():
     #engine = create_engine("postgresql:///?User=postgres&;Password=postgres&Database=esakor&Server=127.0.0.1&Port=5432")
     conn = get_db_connection()
     cur = conn.cursor()
-    df=cur.execute("SELECT district, sum(plot_area) FROM vparcel group by district")
+    df = cur.execute(
+        "SELECT district, sum(plot_area) FROM vparcel group by district")
     print(df)
 
 # stroing into different ARRAY/ list for bargraphs
     District = []
     plotA = []
-    
+
     for i in cur:
         District.append(i[0])
         plotA.append(i[1])
-	
+
     print("Name of District = ", District)
     print("Total Area = ", plotA)
-    
-	# Return the components to the HTML template
+
+    # Return the components to the HTML template
     return render_template(
-		template_name_or_list='plotchart.html',
-		data=plotA,
-		labels=District,
-	)
+        template_name_or_list='plotchart.html',
+        data=plotA,
+        labels=District,
+    )
 
 
-#chart app for Landtype
+# chart app for Landtype
 @app.get('/landtypechart')
-def homepage2():     
+def homepage2():
     #engine = create_engine("postgresql:///?User=postgres&;Password=postgres&Database=esakor&Server=127.0.0.1&Port=5432")
     conn = get_db_connection()
     cur = conn.cursor()
-    df=cur.execute("SELECT fdescr, sum(etosarea) FROM vthram group by fdescr")
+    df = cur.execute(
+        "SELECT fdescr, sum(etosarea) FROM vthram group by fdescr")
     print(df)
 
 # stroing into different ARRAY/ list for bargraphs
     Landtype = []
     TArea = []
-    
+
     for i in cur:
         Landtype.append(i[0])
         TArea.append(i[1])
-	
+
     print("Landtype = ", Landtype)
     print("Total Area = ", TArea)
-    
-	# Return the components to the HTML template
+
+    # Return the components to the HTML template
     return render_template(
-		'landtypechart.html',
-		data=TArea,
-		labels=Landtype,
-	)
+        'landtypechart.html',
+        data=TArea,
+        labels=Landtype,
+    )
 
 
-#Search by Thram part
+# Search by Thram part
 
 @app.route('/district')
 def get_district():
@@ -180,7 +196,25 @@ def plot_thram():
         cur.execute(
             "SELECT * FROM vparcel WHERE sheet_id = %s", [tharm_id])
         toplots = cur.fetchall()
+        plots = {
+            "type": "FeatureCollection",
+            "features": [],
+            "property": {
+                "name": "Thrams",
+                "id": tharm_id
+            }
+        }
         for row in toplots:
+            plots["features"].append({
+                "type": "Feature",
+                "geometry": json.loads(row[13]),
+                "property": {
+                    "district": row[0],
+                    "district_id": row[1],
+                    "plot_id": row[9],
+                    "plot_area": row[11]
+                }
+            })
             district = str(row[0])
             district_id = row[1]
             subdist_id = row[2]
@@ -198,7 +232,9 @@ def plot_thram():
             geojson = geometry
             print(geojson)
         """ return jsonify(geometry) """
-        return render_template('map.html', data=geojson)
+        return jsonify(plots)
+        return render_template('map.html', data=plots)
+
 
 @app.route("/map")
 def showmap():
@@ -207,5 +243,5 @@ def showmap():
 
 
 if __name__ == "__main__":
-    
+
     app.run(debug=True)
