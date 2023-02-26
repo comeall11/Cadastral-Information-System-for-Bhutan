@@ -2,7 +2,32 @@ body {
     height: 100%;
     font-family: "Lato", sans-serif
 }
-
+#mapplot {
+  position: fixed;
+  margin-top: 10%;
+  margin-bottom:2%;
+  margin-right:20px;
+  margin-left:20px;
+  top: 0;
+  right: 0;
+  left:0;
+  bottom: 0;
+  width: 95%;
+  background-color: #f2f2f2;
+}
+#mapplots {
+  position: fixed;
+  margin-top: 10%;
+  margin-bottom:2%;
+  margin-right:20px;
+  margin-left:20px;
+  top: 0;
+  right: 0;
+  left:0;
+  bottom: 0;
+  width: 95%;
+  background-color: #f2f2f2;
+}
 .mySlides {
     display: none
 }

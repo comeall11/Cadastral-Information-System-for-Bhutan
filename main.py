@@ -30,13 +30,14 @@ def plot():
 def get_plotid():
     conn = get_db_connection()
     cur = conn.cursor()
-    eplotid = request.form['plot_id']  # "NAJ-3101"
-    print(eplotid)
-    cur.execute(
-        "SELECT * FROM vthram WHERE eplotid = %s", [eplotid])
-    plot = cur.fetchall()
-    print(plot)
-    return render_template('map.html', data=plot)
+    plot = []
+    if request.method == 'POST':
+        Plot_id = request.form['plot_id']
+        cur.execute(
+            "SELECT * FROM vparcel WHERE plot_id = %s", [Plot_id])
+        plot = cur.fetchall()
+        print(plot)
+    return render_template('mapplot.html', Plot=plot)
 
 
 # Displaying Index welcome image app
@@ -181,7 +182,7 @@ def get_thram():
             "SELECT cgewog,cthram,cvillage FROM thram WHERE cgewog = %s", [gewog_id])
         tharms = cur.fetchall()
         print(tharms)
-    return jsonify({'htmlresponse': render_template('tharm.html', tharm=tharms,gewog=gewog_id)})
+    return jsonify({'htmlresponse': render_template('tharm.html', tharm=tharms)})
 
 
 @app.route("/plot_thram", methods=["POST", "GET"])
@@ -191,12 +192,12 @@ def plot_thram():
     toplots = []
     if request.method == 'POST':
         tharm_id = request.form['tharm_id']
-        thram_gewog=request.form['cgewog']
+        thram_gewog = request.form['cgewog']
         print("hello")
         print(tharm_id)
         print(thram_gewog)
         cur.execute(
-            "SELECT * FROM vparcel WHERE subdist_id = %s AND sheet_id = %s", (thram_gewog,tharm_id) )
+            "SELECT * FROM vparcel WHERE subdist_id = %s AND sheet_id = %s", (thram_gewog, tharm_id))
         toplots = cur.fetchall()
         plots = {
             "type": "FeatureCollection",
@@ -228,7 +229,6 @@ def plot_thram():
             })
         print(toplots)
         return jsonify(plots)
-        
 
 
 @app.route("/map")
