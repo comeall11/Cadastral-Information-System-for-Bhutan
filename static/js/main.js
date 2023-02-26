@@ -28,6 +28,7 @@ var sub_district = L.geoJSON(sub_dist, {
     label.addTo(map);
   },
   style: {
+    fillOpacity: 0,
     color: 'black',
   }
 }).addTo(map);
