@@ -8,7 +8,9 @@
                         $('#show_thrams').html(tharm);
                         $('#show_thrams').append(tharm.htmlresponse);
                   });
-                  return false;
+                  $.post("/plot_thram", {
+                        gewog_id: $('#search_gewog_id option:selected').val(),
+                  });
             });
       });
 

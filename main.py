@@ -48,7 +48,7 @@ app.config['UPLOAD_FOLDER'] = image_folder
 @app.route('/index')
 def show_index():
     full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'mainimage.jpeg')
-    developer = os.path.join(app.config['UPLOAD_FOLDER'], 'developers.png')
+    developer = os.path.join(app.config['UPLOAD_FOLDER'], 'developerse.png')
     return render_template("index.html", user_image=full_filename, developers=developer)
 
 # chart app for Thram holders
@@ -181,7 +181,7 @@ def get_thram():
             "SELECT cgewog,cthram,cvillage FROM thram WHERE cgewog = %s", [gewog_id])
         tharms = cur.fetchall()
         print(tharms)
-    return jsonify({'htmlresponse': render_template('tharm.html', tharm=tharms)})
+    return jsonify({'htmlresponse': render_template('tharm.html', tharm=tharms,gewog=gewog_id)})
 
 
 @app.route("/plot_thram", methods=["POST", "GET"])
@@ -191,10 +191,12 @@ def plot_thram():
     toplots = []
     if request.method == 'POST':
         tharm_id = request.form['tharm_id']
+        thram_gewog=request.form['cgewog']
         print("hello")
         print(tharm_id)
+        print(thram_gewog)
         cur.execute(
-            "SELECT * FROM vparcel WHERE sheet_id = %s", [tharm_id])
+            "SELECT * FROM vparcel WHERE subdist_id = %s AND sheet_id = %s", (thram_gewog,tharm_id) )
         toplots = cur.fetchall()
         plots = {
             "type": "FeatureCollection",
@@ -224,6 +226,7 @@ def plot_thram():
                     "land_use": row[12],
                 }
             })
+        print(toplots)
         return jsonify(plots)
         
 

@@ -30,6 +30,8 @@
   <!-- leaflet js -->
   <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+  <script src="https://cdn.jsdelivr.net/leaflet.label/0.2.4/leaflet.label.js"></script>
+
 
   <script type="text/javascript">
     $(document).ready(function () {
@@ -87,6 +89,59 @@
   <script src="../static/data/district.js"></script>
   <script src="../static/data/subdistrict.js"></script>
   <script src="../static/js/main.js"></script>
+  <!--   <div id="table-container">
+    <table id="data-table">
+      <thead>
+        <td>
+          <th>Owner</th>
+          <th>District</th>
+          <th>Geowog</th>
+          <th>Owner_id</th>
+          <th>Tenure_type</th>
+          <th>Plots</th>
+          <th>Total_area</th>
+          <th>Land_use</th>
+        </td>
+      </thead>
+      <tbody></tbody>
+    </table>
+  
+  </div>
+  <script>
+    fetch('/plot_thram')
+      .then(response => response.json())
+      .then(data => {
+        const tableBody = document.querySelector('#data-table tbody');
+        for (let i = 0; i < count(row.data); i++) {
+          const tableRow = document.createElement('tr');
+          const Owner = document.createElement('td');
+          const District = document.createElement('td');
+          const Geowog = document.createElement('td');
+          const Owner_id = document.createElement('td');
+          const Tenure_type = document.createElement('td');
+          const Plots = document.createElement('td');
+          const Total_area= document.createElement('td');
+          const Land_use = document.createElement('td');
+          Owner.textContent = data[i].owner_name;
+          District.textContent = data[i].district;
+          Geowog.textContent = data[i].sub_district;
+          Owner_id.textContent = data[i].owner_id;
+          Tenure_type.textContent = data[i].tenure_type;
+          Plots.textContent = data[i].plot_id;
+          Total_area.textContent = data[i].plot_area;
+          Land_use.textContent = data[i].land_use;
+          tableRow.appendChild(Owner);
+          tableRow.appendChild(District);
+          tableRow.appendChild(Geowog);
+          tableRow.appendChild(Owner_id);
+          tableRow.appendChild(Tenure_type);
+          tableRow.appendChild(Plots);
+          tableRow.appendChild(Total_area);
+          tableRow.appendChild(Land_use);
+          tableBody.appendChild(tableRow);
+        }
+      });
+  </script> -->
 </body>
 
 </html>
