@@ -211,29 +211,21 @@ def plot_thram():
                 "property": {
                     "district": row[0],
                     "district_id": row[1],
+                    "subdist_id": row[2],
+                    "sub_district": row[3],
+                    "thram_no": row[4],
+                    "village_name": row[5],
+                    "own_id": row[6],
+                    "owner_name": row[7],
+                    "tenure_type": row[8],
                     "plot_id": row[9],
-                    "plot_area": row[11]
+                    "plot_name": row[10],
+                    "plot_area": row[11],
+                    "land_use": row[12],
                 }
             })
-            district = str(row[0])
-            district_id = row[1]
-            subdist_id = row[2]
-            sub_district = str(row[3])
-            sheet_no = row[4]
-            village_name = str(row[5])
-            own_id = row[6]
-            owner_name = str(row[7])
-            tenure_type = str(row[8])
-            plot_id = str(row[9])
-            plot_name = str(row[10])
-            plot_area = row[11]
-            land_use = str(row[12])
-            geometry = str(row[13])
-            geojson = geometry
-            print(geojson)
-        """ return jsonify(geometry) """
         return jsonify(plots)
-        return render_template('map.html', data=plots)
+        
 
 
 @app.route("/map")
