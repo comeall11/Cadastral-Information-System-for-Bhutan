@@ -1,0 +1,9 @@
+os
+json
+jinja2
+psycopg2
+Flask
+render_template
+request
+jsonify
+Flask_sqlalchemy
