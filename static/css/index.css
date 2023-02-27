@@ -1,126 +1,140 @@
 body {
-    height: 100%;
-    font-family: "Lato", sans-serif
+  height: 100%;
+  font-family: "Lato", sans-serif
 }
+
 #mapplot {
   position: fixed;
   margin-top: 10%;
-  margin-bottom:2%;
-  margin-right:20px;
-  margin-left:20px;
+  margin-bottom: 2%;
+  margin-right: 20px;
+  margin-left: 20px;
   top: 0;
   right: 0;
-  left:0;
+  left: 0;
   bottom: 0;
   width: 95%;
   background-color: #f2f2f2;
 }
-#mapplots {
-  position: fixed;
-  margin-top: 10%;
-  margin-bottom:2%;
-  margin-right:20px;
-  margin-left:20px;
-  top: 0;
-  right: 0;
-  left:0;
-  bottom: 0;
-  width: 95%;
-  background-color: #f2f2f2;
+
+.label1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 6px;
+  font-weight: lighter;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+  max-zoom: 8;
 }
+
+.label2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  font-weight: bold;
+  color: rgb(230, 22, 234);
+  border-radius: 5px;
+  padding: 5px;
+}
+
 .mySlides {
-    display: none
+  display: none
 }
 
 /* Dropdown Button */
 .dropbtn {
-    background-color: #090909;
-    color: white;
-    min-width: 180px;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    margin-top: 2px;
-    position: absolute;
-    left: 7;
+  background-color: #090909;
+  color: white;
+  min-width: 180px;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  margin-top: 2px;
+  position: absolute;
+  left: 7;
 }
 
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
-    position:fixed;
-    display: inline-block;
+  position: fixed;
+  display: inline-block;
 }
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 180px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 180px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
 }
 
 /* Links inside the dropdown */
 .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
 }
 
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {
-    background-color: #ddd;
+  background-color: #ddd;
 }
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
-    display: block;
+  display: block;
 }
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
-    background-color: #3e8e41;
+  background-color: #3e8e41;
 }
+
 #table-container {
-    position: fixed;
-    width: 30%;
-    height: 40%;
-    background-color: #f2f2f2;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-  table {
-    width: 20%;
-    border-collapse: collapse;
-    font-size: 10px;
-    color: #333;
-  }
-  
-  th, td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  th {
-    background-color: #4CAF50;
-    color: #fff;
-  }
-  .my-table {
-    border: 1px solid #ccc;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
-  }
-  
-  .my-table th {
-    background-color: #333;
-    color: #fff;
-  }
-  
-  .my-table td {
-    background-color: #f2f2f2;
-    color: #333;
-  }
-    
+  position: fixed;
+  width: 30%;
+  height: 40%;
+  background-color: #f2f2f2;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+table {
+  width: 20%;
+  border-collapse: collapse;
+  font-size: 10px;
+  color: #333;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #4CAF50;
+  color: #fff;
+}
+
+.my-table {
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+.my-table th {
+  background-color: #333;
+  color: #fff;
+}
+
+.my-table td {
+  background-color: #f2f2f2;
+  color: #333;
+}

@@ -15,6 +15,28 @@ body {
         width: 70%;
         background-color: #f2f2f2;
 }
+.label1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 4px;
+        font-weight: lighter;
+        color: white;
+        border-radius: 5px;
+        padding: 5px;
+        max-zoom: 8;
+      }
+      
+      .label2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 10px;
+        font-weight: bold;
+        color: rgb(230, 22, 234);
+        border-radius: 5px;
+        padding: 5px;
+      }
 
 #charts {
         position: absolute;

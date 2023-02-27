@@ -1,11 +1,10 @@
-<!DOCTYPE html>
 <html lang="en">
-</style>
 
 <head>
-    <title>Dashboard</title>
+    <title>Cadastral Information System</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- css  -->
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
@@ -18,21 +17,18 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="../static/css/index.css">
 
-
-    <!-- jquery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-
-
-    <!-- leaflet js -->
+    <!-- Javascript -->
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
     <script src="https://cdn.jsdelivr.net/leaflet.label/0.2.4/leaflet.label.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
 
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -43,24 +39,19 @@
             <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
                 href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i
                     class="fa fa-bars"></i></a>
-
             <a href="index" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Home</a>
             <a href="district" class="w3-bar-item w3-button w3-padding-large">Search by Thram</a>
             <a href="\plotid" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Search by Plot ID</a>
-
-
         </div>
-
     </div>
 
 
-    <!-- The Thram Section -->
+    <!-- Form to input next plot_id -->
     <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
         <div class="container">
             <div class="row">
-                <!--<div class="col-lg-2"></div>-->
+                <div class="col-lg-2"></div>
                 <div class="col-lg-8">
-
                     <form action="/plot" name="form" id="form" method="post">
                         <div id="plotid">
                             <label>Enter your Plot ID</label>
@@ -68,37 +59,38 @@
                             <button type="submit" id="button" class="btn btn-primary">Search</button>
                         </div>
                     </form>
+                    <!-- Map area to show selcted plot_id -->
+                    <div id="mapplot">
+                        <!-- Administrative Boundaries js -->
+                        <script src="../static/data/country.js"></script>
+                        <script src="../static/data/district.js"></script>
+                        <script src="../static/data/subdistrict.js"></script>
+                        <script src="../static/js/mainplot.js"></script>
 
+                        <!-- Script to plot the plot retrived from the flask function and plotting in the map -->
+                        <script type="text/javascript">
+                            const Plots = JSON.parse({{ Plot| safe }});
+                            var parcel = L.geoJSON(Plots,
+                                style = {
+                                    style: {
+                                        fillOpacity: 0,
+                                        color: 'red',
+                                    },
+                                }).addTo(mapplot);
+                            var bnd_parcel = parcel.getBounds()
+                            var center = bnd_parcel.getCenter();
+                            var zoom = mapplot.getBoundsZoom(bnd_parcel);
+                            polygonLayer = parcel;
+                            mapplot.flyTo(center, zoom, {
+                                duration: 5
+                            });
+                        </script>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="mapplot">
-        <!-- Administrative Boundaries js -->
-        <script src="../static/data/country.js"></script>
-        <script src="../static/data/district.js"></script>
-        <script src="../static/data/subdistrict.js"></script>
-        <script src="../static/js/mainplot.js"></script>
 
-        <script type="text/javascript">
-
-            const Plots = JSON.parse({{ Plot| safe }});
-            var parcel = L.geoJSON(Plots,
-                style = {
-                    style: {
-                        fillOpacity: 0,
-                        color: 'red',
-                    },
-                }).addTo(mapplot);
-            var bnd_parcel = parcel.getBounds()
-            var center = bnd_parcel.getCenter();
-            var zoom = mapplot.getBoundsZoom(bnd_parcel);
-            mapplot.flyTo(center, zoom, {
-
-                duration: 5
-            });
-        </script>
-    </div>
 </body>
 
 </html>
