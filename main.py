@@ -34,7 +34,7 @@ def get_plotid():
     if request.method == 'POST':
         Plot_id = request.form['plot_id']
         cur.execute(
-            "SELECT * FROM vthram WHERE eplotid = %s", [Plot_id])
+            "SELECT * FROM vparcel WHERE plot_id = %s", [Plot_id])
         plot = cur.fetchall()
         print(plot)
     return render_template('mapplot.html', Plot=plot)
