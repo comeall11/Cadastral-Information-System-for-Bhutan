@@ -64,6 +64,10 @@ The Python program will be designed to perform the following tasks:
 - Implement error handling to gracefully handle exceptions and errors that may occur during runtime.
 - Use **Flask_sqlalchemy** to manage the database schema and perform ***CRUD*** (Create, Read, Update, Delete) operations on the database.
 
+## Authors
+---
+***Kamal Shahi***,  ***Yeshey Samdrup*** and ***Jiang Yuewei***
+Master's degree in Geospatial Technologies at [NOVA University of Lisbon](https://www.novaims.unl.pt/), [WWU Münster](https://www.uni-muenster.de/en/) and [UJI](https://www.uji.es/)
 
 
 
