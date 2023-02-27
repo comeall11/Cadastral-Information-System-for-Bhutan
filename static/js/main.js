@@ -17,56 +17,46 @@ var Stamen_Terrain = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terra
 });
 
 var sub_district = L.geoJSON(sub_dist, {
-  onEachFeature: function (feature, layer) {
-    var label = L.marker(layer.getBounds().getCenter(), {
-      icon: L.divIcon({
-        className: 'label',
-        html: feature.properties.admin2Name,
-      })
-    });
-    // add the label to the map
-    label.addTo(map);
-  },
   style: {
     fillOpacity: 0,
-    color: 'black',
+    color: 'grey',
+    weight: 0.3
   }
 }).addTo(map);
 
+sub_district.eachLayer(function (layer) {
+  var center = layer.getBounds().getCenter();
+  var label = L.marker(center, {
+    icon: L.divIcon({
+      className: 'label1',
+      html: layer.feature.properties.admin2Name
+    })
+  }).addTo(map);
+});
+
 var district = L.geoJSON(districtJSON, {
-  onEachFeature: function (feature, layer) {
-    var label = L.marker(layer.getBounds().getCenter(), {
-      icon: L.divIcon({
-        className: 'label',
-        html: feature.properties.admin1Name,
-      })
-    });
-    // add the label to the map
-    label.addTo(map);
-  },
   style: {
     fillOpacity: 0,
     color: 'brown',
+    weight: 1
   }
 }).addTo(map);
 
-var country = L.geoJSON(countryJSON, {
-  onEachFeature: function (feature, layer) {
-    var label = L.marker(layer.getBounds().getCenter(), {
-      icon: L.divIcon({
-        className: 'label',
-        html: feature.properties.admin0Name,
-        fontSize: 20,
+district.eachLayer(function (layer) {
+  var center = layer.getBounds().getCenter();
+  var label = L.marker(center, {
+    icon: L.divIcon({
+      className: 'label2',
+      html: layer.feature.properties.admin1Name
+    })
+  }).addTo(map);
+});
 
-      })
-    });
-    // add the label to the map
-    label.addTo(map);
-  },
+var country = L.geoJSON(countryJSON, {
   style: {
     fillOpacity: 0,
     color: 'red',
-    outerWidth: 0.2
+    weight: 2.5
   }
 }).addTo(map);
 
