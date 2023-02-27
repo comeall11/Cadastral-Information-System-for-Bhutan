@@ -50,7 +50,8 @@ app.config['UPLOAD_FOLDER'] = image_folder
 def show_index():
     full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'mainimage.jpeg')
     developer = os.path.join(app.config['UPLOAD_FOLDER'], 'developerse.png')
-    return render_template("index.html", user_image=full_filename, developers=developer)
+    nova_logo = os.path.join(app.config['UPLOAD_FOLDER'], 'NOVA_IMS_Logo.png')
+    return render_template("index.html", user_image=full_filename, developers=developer, NOVA_IMS_Logo=nova_logo)
 
 # chart app for Thram holders
 
@@ -179,7 +180,7 @@ def get_thram():
         print("hello motto")
         print(gewog_id)
         cur.execute(
-            "SELECT cgewog,cthram,cvillage FROM thram WHERE cgewog = %s", [gewog_id])
+            "SELECT cgewog,cthram,cvillage,cownname FROM thram WHERE cgewog = %s", [gewog_id])
         tharms = cur.fetchall()
         print(tharms)
     return jsonify({'htmlresponse': render_template('tharm.html', tharm=tharms)})
@@ -231,10 +232,6 @@ def plot_thram():
         return jsonify(plots)
 
 
-@app.route("/map")
-def showmap():
-    parcel = plot_thram().get_json()
-    return render_template('map.html', geojson=parcel)
 
 
 if __name__ == "__main__":

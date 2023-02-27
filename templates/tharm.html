@@ -3,14 +3,14 @@
         $('#show_tharms_id').change(function () {
             $.post("/plot_thram", {
                 tharm_id: $('#show_tharms_id option:selected').val(),
-                cgewog:$('#value2').val(),
+                cgewog: $('#value2').val(),
             }, function (res) {
                 if (polygonLayer) {
                     map.removeLayer(polygonLayer)
                 }
                 var parcel = L.geoJSON(res, {
                     onEachFeature: function (feature, layer) {
-                        
+
                         layer.bindPopup(
                             "<h5>" + "Owner:" + feature.property.owner_name + "<h5>" +
                             "<table class='table table-striped'>" + "<table class='table table-striped'>" +
@@ -35,15 +35,15 @@
                             "</tr></table>" +
                             "<button type='button' onclick='openEditForm(" + JSON.stringify(feature.properties) + ")' class='btn btn-primary btn-sm'>Edit</button>"
                         );
-                        
+
                     },
                     style: {
                         fillOpacity: 0,
                         color: 'yellow',
                     }
-                        
+
                 }).addTo(map);
-                
+
                 var bnd_parcel = parcel.getBounds()
                 var center = bnd_parcel.getCenter();
                 var zoom = map.getBoundsZoom(bnd_parcel);
@@ -64,11 +64,11 @@
         <label>Select Thram</label>
         <select name="search_tharm" id="show_tharms_id" class="form-control">
             <option value="" selected="selected"></option>
-            {% for cgewolg,cthram,cvillage in tharm %}
-            <option value="{{cthram}}">{{cthram}}" of "{{cvillage}}</option>
+            {% for cgewolg,cthram,cvillage,cownname in tharm %}
+            <option value="{{cthram}}">Thram no.{{cthram}} of {{cownname}}</option>
             {% endfor %}
         </select>
-        
-        <input value="{{tharm[0][0]}}" id="value2" style = display:none>
+
+        <input value="{{tharm[0][0]}}" id="value2" style=display:none>
     </div>
 </form>
