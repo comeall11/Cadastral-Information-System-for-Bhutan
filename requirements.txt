@@ -1,3 +1,6 @@
+sys
+mariadb
+pandas
 os
 json
 jinja2
