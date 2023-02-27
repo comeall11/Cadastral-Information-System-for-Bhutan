@@ -69,11 +69,11 @@ The Python program will be designed to perform the following tasks:
 ***Kamal Shahi***
 
 Master's degree in Geospatial Technologies at [NOVA University of Lisbon](https://www.novaims.unl.pt/), [WWU Münster](https://www.uni-muenster.de/en/) and [UJI](https://www.uji.es/)
+
 ***Yeshey Samdrup*** 
-
 Master's degree in Geospatial Technologies at [NOVA University of Lisbon](https://www.novaims.unl.pt/), [WWU Münster](https://www.uni-muenster.de/en/) and [UJI](https://www.uji.es/)
-***Jiang Yuewei***
 
+***Jiang Yuewei***
 Master's degree in Geospatial Technologies at [NOVA University of Lisbon](https://www.novaims.unl.pt/), [WWU Münster](https://www.uni-muenster.de/en/) and [UJI](https://www.uji.es/)
 
 
