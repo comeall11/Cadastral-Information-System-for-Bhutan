@@ -23,7 +23,7 @@ def get_db_connection():
         host="localhost",
         database="esakor",
         user='postgres',
-        password='yeshey010')
+        password='1111')
     return conn
 
 # Function to load the index page
