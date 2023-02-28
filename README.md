@@ -1,4 +1,4 @@
-# Cadastral Information System of Bhutan
+# Cadastral Information System for Bhutan
 
 
 ![image info](./static/images/mainimage.jpeg)
