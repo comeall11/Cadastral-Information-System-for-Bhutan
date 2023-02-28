@@ -76,7 +76,5 @@ adminLayer = {
 }
 L.control.layers(baseLayer).addTo(mapplot);
 L.control.layers(adminLayer).addTo(mapplot);
-baseLayer.addOverlay(baseLayer, 'Base Maps');
-
 
 var polygonLayer;

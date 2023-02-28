@@ -235,8 +235,34 @@ def get_plotid():
         cur.execute(
             "SELECT * FROM vparcel WHERE plot_id = %s", [Plot_id])
         plot = cur.fetchall()
-        print(plot)
-    return render_template('mapplot.html', Plot=plot)
+        """ plots ={
+            "type": "FeatureCollection",
+            "features": [],
+            "property": {
+                "name": "Thrams",
+                "id": Plot_id
+            }
+        }
+        for row in plot:
+            plots["features"].append({
+                "type": "Feature",
+                "geometry": json.loads(row[13]),
+                "property": {
+                    "district": row[0],
+                    "district_id": row[1],
+                    "subdist_id" :row[2],
+                    "sub_district" : row[3],
+                    "sheet_no" : row[4],
+                    "village_name" : row[5],
+                    "own_id" : row[6],
+                    "owner_name" : row[7],
+                    "tenure_type" : row[8],
+                    "plot_id" : row[9],
+                    "plot_name" : row[10],
+                    "plot_area" : row[11],
+                    "land_use" : row[12], }
+            }) """
+        return render_template('mapplot.html', Plot=plot)
 
 ###------End of Search by Plor Id PAGE-----------####
 

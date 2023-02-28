@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
   <title>Cadastral Information System</title>
   <meta charset="UTF-8">
@@ -69,17 +70,66 @@
     </div>
   </div>
 
-<!--   Post the inpur plot_id from form to the flask as plot_id -->
+  <!--   Post the inpur plot_id from form to the flask as plot_id -->
   <script type="text/javascript">
     $(document).ready(function () {
       $('#button').submit(function () {
         console.log("submit")
         $.post("/plot", {
           plot_id: $('#plot_id').val(),
+        }, function (res) {
+          if (polygonLayer) {
+            map.removeLayer(polygonLayer)
+          }
+          var parcel = L.geoJSON(res, {
+            onEachFeature: function (feature, layer) {
+
+              layer.bindPopup(
+                "<h5>" + "Owner:" + feature.property.owner_name + "<h5>" +
+                "<table class='table table-striped'>" + "<table class='table table-striped'>" +
+                "</tr><tr>" +
+                "<td>District</td><td>" + feature.property.district + "</td>" +
+                "</tr><tr>" +
+                "<td>Gewog</td><td>" + feature.property.sub_district + "</td>" +
+                "</tr><tr>" +
+                "<td>Thram Number</td><td>" + feature.property.thram_no + "</td>" +
+                "</tr><tr>" +
+                "<td>Village Name</td><td>" + feature.property.village_name + "</td>" +
+                "</tr><tr>" +
+                "<td>Owner ID</td><td>" + feature.property.owner_id + "</td>" +
+                "</tr><tr>" +
+                "<td>Tenure Type</td><td>" + feature.property.tenure_type + "</td>" +
+                "</tr><tr>" +
+                "<td>Plot ID</td><td>" + feature.property.plot_id + "</td>" +
+                "</tr><tr>" +
+                "<td>Plot Area</td><td>" + feature.property.plot_area + "</td>" +
+                "</tr><tr>" +
+                "<td>Land Use</td><td>" + feature.property.land_use + "</td>" +
+                "</tr></table>" +
+                "<button type='button' onclick='openEditForm(" + JSON.stringify(feature.properties) + ")' class='btn btn-primary btn-sm'>Edit</button>"
+              );
+
+            },
+            style: {
+              fillOpacity: 0,
+              color: 'yellow',
+            }
+
+          }).addTo(mapplot);
+          var bnd_parcel = parcel.getBounds()
+          var center = bnd_parcel.getCenter();
+          var zoom = mapplot.getBoundsZoom(bnd_parcel);
+          polygonLayer = parcel;
+          mapplot.flyTo(center, zoom, {
+            animate: true,
+            duration: 1.5
+          });
+
         })
         return false;
       });
     });
   </script>
 </body>
+
 </html>

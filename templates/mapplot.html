@@ -19,6 +19,9 @@
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="../static/css/index.css">
 
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
     <!-- Javascript -->
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
@@ -26,9 +29,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous"></script>
-
-    <!-- jquery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -69,7 +69,8 @@
 
                         <!-- Script to plot the plot retrived from the flask function and plotting in the map -->
                         <script type="text/javascript">
-                            const Plots = JSON.parse({{ Plot| safe }});
+                            var Plots = JSON.parse({{ Plot| safe }});
+
                             var parcel = L.geoJSON(Plots,
                                 style = {
                                     style: {
@@ -77,12 +78,35 @@
                                         color: 'red',
                                     },
                                 }).addTo(mapplot);
+                            parcel.bindPopup("<h5>" + "Owner:" + "{{ Plot[0][6]}}" + "<h5>" +
+                                "<table class='table table-striped'>" + "<table class='table table-striped'>" +
+                                "</tr><tr>" +
+                                "<td>District</td><td>" + "{{ Plot[0][0]}}" + "</td>" +
+                                "</tr><tr>" +
+                                "<td>Gewog</td><td>" + "{{ Plot[0][3]}}" + "</td>" +
+                                "</tr><tr>" +
+                                "<td>Thram Number</td><td>" + "{{ Plot[0][4]}}" + "</td>" +
+                                "</tr><tr>" +
+                                "<td>Village Name</td><td>" + "{{ Plot[0][8]}}" + "</td>" +
+                                "</tr><tr>" +
+                                "<td>Owner ID</td><td>" + "{{ Plot[0][5]}}" + "</td>" +
+                                "</tr><tr>" +
+                                "<td>Tenure Type</td><td>" + "{{ Plot[0][7]}}" + "</td>" +
+                                "</tr><tr>" +
+                                "<td>Plot ID</td><td>" + "{{ Plot[0][9]}}" + "</td>" +
+                                "</tr><tr>" +
+                                "<td>Plot Area(Acre)</td><td>" + "{{ Plot[0][11]}}" + "</td>" +
+                                "</tr><tr>" +
+                                "<td>Land Use</td><td>" + "{{ Plot[0][12]}}" + "</td>" +
+                                "</tr></table>" +
+                                "<button type='button' onclick='openEditForm(" + JSON.stringify("{{ Plot[0][0]}}") + ")' class='btn btn-primary btn-sm'>Edit</button>"
+                            );
                             var bnd_parcel = parcel.getBounds()
                             var center = bnd_parcel.getCenter();
                             var zoom = mapplot.getBoundsZoom(bnd_parcel);
                             polygonLayer = parcel;
                             mapplot.flyTo(center, zoom, {
-                                duration: 5
+                                duration: 2
                             });
                         </script>
                     </div>
