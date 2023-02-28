@@ -15,8 +15,13 @@ con = mariadb.connect(
     password="yeshey010",
     database="esakor"
 )
-df = pn.read_sql("select * from Thram where cthram=3321 and cgewog=29", con)
-print(df)
+district = pn.read_sql("select * from district", con)
+block = pn.read_sql("select * from district", con)
+thram = pn.read_sql("select * from district", con)
+owntype = pn.read_sql("select * from district", con)
+landtype = pn.read_sql("select * from district", con)
+plot = pn.read_sql("select * from district", con)
+
 uri = psycopg2.connect(
     host="localhost",
     port=5432,
@@ -25,24 +30,101 @@ uri = psycopg2.connect(
     database="esakor1"
 )
 
-# Function to insert the data to the schema in the postgressql
+# Function to insert the data tables(district,block,thram,plot,owntype,landtype) to the schema in the postgressql
 
 
-def insert_data(self, df: pn.DataFrame, schema: str, table: str, chunksize: int = 100) -> None:
-    """This function abstracts the `INSERT` queries
-
-    Args:
-        df (pn.DataFrame): dataframe to be inserted
-        schema (str): the name of the schema
-        table (str): the name of the table
-        chunksize (int): the number of rows to insert at the time
-    """
+def insert_data(self, district: pn.DataFrame, schema: str, table: str, chunksize: int = 100) -> None:
     try:
         engine = sql.create_engine(self.uri)
         with engine.connect() as uri:
             tran = uri.begin()
-            df.to_sql(
-                name=table, schema=schema,
+            district.to_sql(
+                name=district, schema=schema,
+                con=uri, if_exists="append", index=False,
+                chunksize=chunksize, method="multi"
+            )
+            tran.commit()
+    except Exception as e:
+        if 'tran' in locals():
+            tran.rollback()
+        die(f"{e}")
+
+
+def insert_data(self, block: pn.DataFrame, schema: str, table: str, chunksize: int = 100) -> None:
+    try:
+        engine = sql.create_engine(self.uri)
+        with engine.connect() as uri:
+            tran = uri.begin()
+            district.to_sql(
+                name=block, schema=schema,
+                con=uri, if_exists="append", index=False,
+                chunksize=chunksize, method="multi"
+            )
+            tran.commit()
+    except Exception as e:
+        if 'tran' in locals():
+            tran.rollback()
+        die(f"{e}")
+
+
+def insert_data(self, thram: pn.DataFrame, schema: str, table: str, chunksize: int = 100) -> None:
+    try:
+        engine = sql.create_engine(self.uri)
+        with engine.connect() as uri:
+            tran = uri.begin()
+            district.to_sql(
+                name=thram, schema=schema,
+                con=uri, if_exists="append", index=False,
+                chunksize=chunksize, method="multi"
+            )
+            tran.commit()
+    except Exception as e:
+        if 'tran' in locals():
+            tran.rollback()
+        die(f"{e}")
+
+
+def insert_data(self, owntype: pn.DataFrame, schema: str, table: str, chunksize: int = 100) -> None:
+    try:
+        engine = sql.create_engine(self.uri)
+        with engine.connect() as uri:
+            tran = uri.begin()
+            district.to_sql(
+                name=owntype, schema=schema,
+                con=uri, if_exists="append", index=False,
+                chunksize=chunksize, method="multi"
+            )
+            tran.commit()
+    except Exception as e:
+        if 'tran' in locals():
+            tran.rollback()
+        die(f"{e}")
+
+
+def insert_data(self, landtype: pn.DataFrame, schema: str, table: str, chunksize: int = 100) -> None:
+    try:
+        engine = sql.create_engine(self.uri)
+        with engine.connect() as uri:
+            tran = uri.begin()
+            district.to_sql(
+                name=landtype, schema=schema,
+                con=uri, if_exists="append", index=False,
+                chunksize=chunksize, method="multi"
+            )
+            tran.commit()
+    except Exception as e:
+        if 'tran' in locals():
+            tran.rollback()
+        die(f"{e}")
+
+
+def insert_data(self, plot: pn.DataFrame, schema: str, table: str, chunksize: int = 100) -> None:
+    try:
+        engine = sql.create_engine(self.uri)
+        with engine.connect() as uri:
+            tran = uri.begin()
+            district.to_sql(
+                name=plot, schema=schema,
                 con=uri, if_exists="append", index=False,
                 chunksize=chunksize, method="multi"
             )
