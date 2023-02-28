@@ -32,7 +32,8 @@
                             "<td>Plot Area(Acre)</td><td>" + feature.property.plot_area + "</td>" +
                             "</tr><tr>" +
                             "<td>Land Use</td><td>" + feature.property.land_use + "</td>" +
-                            "</tr></table>"
+                            "</tr></table>" +
+                            "<button type='button' onclick='openEditForm(" + JSON.stringify(feature.properties) + ")' class='btn btn-primary btn-sm'>Edit</button>"
                         );
                     },
                     style: {
