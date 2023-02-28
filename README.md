@@ -31,7 +31,7 @@ This online system will serve as a platform for all landowners to access their l
 
 ## Workflow
 ---
-![image info](./static/images/workflow.png)
+![image info](./static/images/workflow.jpg)
 ## How to run this project
 ---
 ### Requirements
