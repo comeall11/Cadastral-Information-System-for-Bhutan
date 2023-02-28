@@ -66,7 +66,7 @@ The Python program will be designed to perform the following tasks:
 - Use **Flask_sqlalchemy** to manage the database schema and perform ***CRUD*** (Create, Read, Update, Delete) operations on the database.
 
 ### 2. Run the ETL.py
-This program will connect to the source mariadb database and also to the postgres database whhich is the working database. After editing the database connection credentials, it will create the empty datbase with required tables.
+This program will connect to the source mariadb database and also to the postgres database which is the working database. After editing the database connection credentials, it will populate the data from the source database mariadb to postgres.
 
 ### 3. Run the main.py
 Edit the database connection credentials and run the programme.
