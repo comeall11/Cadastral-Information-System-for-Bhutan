@@ -70,7 +70,9 @@
                         <!-- Script to plot the plot retrived from the flask function and plotting in the map and showing the popup with properties -->
                         <script type="text/javascript">
                             var Plots = JSON.parse({{ Plot| safe }});
-
+                            if (polygonLayer) {
+                                mapplot.removeLayer(polygonLayer)
+                            }
                             var parcel = L.geoJSON(Plots,
                                 style = {
                                     style: {
