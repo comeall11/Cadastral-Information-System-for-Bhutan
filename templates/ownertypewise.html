@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Cadastral Information System</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- css  -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/python/css/report.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+
+  <!--js file for charts-->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" media="screen" href="../static/css/index.css">
+  <title>Thram Holder Districtwise</title>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <div class="w3-top">
+    <div class="w3-bar w3-black w3-card">
+      <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)"
+        onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+      <a href="index" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Home</a>
+      <a href="district" class="w3-bar-item w3-button w3-padding-large">Search by Thram</a>
+      <a href="plotid" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Search by Plot ID</a>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">Overview</button>
+      <div class="dropdown-content">
+        <a href="thramchart">Thram Holder Districtwise</a>
+        <a href="landtypechart">Landtypewise Total Area</a>
+        <a href="plotchart">Total Plots Districtwise</a>
+        <a href="otchart">Total Thram Ownertypewise</a>
+        
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- The Plot Area Chart Section -->
+  <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
+    <div class="container">
+      <div class="row">
+        <!--<div class="col-lg-2"></div>-->
+        ><div class="col-lg-8">
+        </div>
+      </div>
+    </div>
+    <div style="height: 60vh; width: 100%;">
+      <canvas id="myChart"></canvas>
+    </div>
+
+    <!-- Script for generating charts for Plots-->
+    <script>
+      const labels = {{ labels | tojson}};
+
+      const data = {
+        labels: labels,
+        datasets: [{
+          label: 'Number of Thrams',
+          backgroundColor: '#04AA6D',
+          borderColor: '#04AA6D',
+          data: {{ data | tojson}},
+            }]
+        };
+
+      const config = {
+        type: 'bar',
+        data: data,
+        options: { maintainAspectRatio: false }
+      };
+
+      const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+      );
+    </script>
+</body>
+</html>

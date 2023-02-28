@@ -23,7 +23,7 @@ def get_db_connection():
         host="localhost",
         database="esakor",
         user='postgres',
-        password='1111')
+        password='yeshey010')
     return conn
 
 # Function to load the index page
@@ -86,8 +86,8 @@ def homepage1():
         data=plotA,
         labels=District,
     )
-# Function to create the charts of area of land type vs districts under the Overview button
 
+# Function to create the charts of area of land type vs districts under the Overview button
 
 @app.get('/landtypechart')
 def homepage2():
@@ -110,7 +110,29 @@ def homepage2():
         data=TArea,
         labels=Landtype,
     )
+# Function to create the charts of area of land type vs districts under the Overview button
 
+@app.get('/otchart')
+def homepage3():
+    conn = get_db_connection()
+    cur = conn.cursor()
+    df = cur.execute(
+        "select otdescr, count(cthram) from vthram group by otdescr")
+    print(df)
+    # stroing into different ARRAY/ list for bargraphs
+    Ot = []
+    Tn = []
+    for i in cur:
+        Ot.append(i[0])
+        Tn.append(i[1])
+    print("Ownertype = ", Ot)
+    print("Total Thram = ", Tn)
+    # Return the components to the HTML template
+    return render_template(
+        'ownertypewise.html',
+        data=Tn,
+        labels=Ot,
+    )
 ###------END OF INDEX PAGE-----------####
 
 ###------Search By Thram Page-----------####
@@ -235,34 +257,8 @@ def get_plotid():
         cur.execute(
             "SELECT * FROM vparcel WHERE plot_id = %s", [Plot_id])
         plot = cur.fetchall()
-        """ plots ={
-            "type": "FeatureCollection",
-            "features": [],
-            "property": {
-                "name": "Thrams",
-                "id": Plot_id
-            }
-        }
-        for row in plot:
-            plots["features"].append({
-                "type": "Feature",
-                "geometry": json.loads(row[13]),
-                "property": {
-                    "district": row[0],
-                    "district_id": row[1],
-                    "subdist_id" :row[2],
-                    "sub_district" : row[3],
-                    "sheet_no" : row[4],
-                    "village_name" : row[5],
-                    "own_id" : row[6],
-                    "owner_name" : row[7],
-                    "tenure_type" : row[8],
-                    "plot_id" : row[9],
-                    "plot_name" : row[10],
-                    "plot_area" : row[11],
-                    "land_use" : row[12], }
-            }) """
-        return render_template('mapplot.html', Plot=plot)
+        print(plot)
+    return render_template('mapplot.html', Plot=plot)
 
 ###------End of Search by Plor Id PAGE-----------####
 
