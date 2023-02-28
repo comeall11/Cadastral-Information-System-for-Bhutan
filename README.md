@@ -35,7 +35,7 @@ This online system will serve as a platform for all landowners to access their l
 ![image info](./static/images/workflow.jpg)
 ## How to run this project
 ---
-1. Install the Requirements (requirements.txt)
+### 1. Install the Requirements (requirements.txt)
 - **[os]**- This module will be used to interact with the operating system. It provides a way to access environment variables, manage file paths, and execute system commands.
 - **[json]**- This module provides methods for encoding and decoding JSON data. It will be used to handle data in a standardized format.
 - **[jinja2]**- This module provides a template engine that will be used to render dynamic HTML content.
@@ -48,7 +48,7 @@ This online system will serve as a platform for all landowners to access their l
 - **[sys]**- This module provides access to some variables used or maintained by the interpreter and to functions that interact strongly with the interpreter.
 - **[mariadb]**- This is a Python connector for MariaDB database which will be used to establish a connection between the Python program and the MariaDB database.
 - **[pandas]**- This library will be used for data manipulation and analysis. It provides data structures for efficiently storing and manipulating large datasets.
-### Functionality
+###### Functionality
 The Python program will be designed to perform the following tasks:
 - Establish a connection with the **MariaDB** database using **the mariadb connector**.
 - Use the **Pandas** library to load, manipulate and analyze data stored in the **MariaDB** database.
@@ -65,10 +65,10 @@ The Python program will be designed to perform the following tasks:
 - Implement error handling to gracefully handle exceptions and errors that may occur during runtime.
 - Use **Flask_sqlalchemy** to manage the database schema and perform ***CRUD*** (Create, Read, Update, Delete) operations on the database.
 
-2. Run the ETL.py
+### 2. Run the ETL.py
 This program will connect to the source mariadb database and also to the postgres database whhich is the working database. After editing the database connection credentials, it will create the empty datbase with required tables.
 
-3. Run the main.py
+### 3. Run the main.py
 Edit the database connection credentials and run the programme.
 
 
