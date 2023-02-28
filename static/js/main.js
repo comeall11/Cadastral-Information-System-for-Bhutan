@@ -1,6 +1,7 @@
-
+//Declaring map element 
 var map = L.map('map').setView([27.5, 90.4], 8);
 
+//Basemap Layers
 var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 20,
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -16,6 +17,7 @@ var Stamen_Terrain = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/terra
   ext: 'png'
 });
 
+//Loadning Administrative Boundary from Geojson files
 var sub_district = L.geoJSON(sub_dist, {
   style: {
     fillOpacity: 0,

@@ -1,4 +1,4 @@
-//Declaring map 
+//Declaring map element 
 var mapplot = L.map('mapplot').setView([27.5, 90.4], 8);
 
 //Basemap Layers
@@ -26,13 +26,13 @@ var sub_district = L.geoJSON(sub_dist, {
     weight: 0.3
   }
 }).addTo(mapplot);
-sub_district.eachLayer(function(layer) {
+sub_district.eachLayer(function (layer) {
   var center = layer.getBounds().getCenter();
   var label = L.marker(center, {
-      icon: L.divIcon({
-          className: 'label1',
-          html: layer.feature.properties.admin2Name
-      })
+    icon: L.divIcon({
+      className: 'label1',
+      html: layer.feature.properties.admin2Name
+    })
   }).addTo(mapplot);
 });
 
@@ -44,13 +44,13 @@ var district = L.geoJSON(districtJSON, {
   }
 }).addTo(mapplot);
 
-district.eachLayer(function(layer) {
+district.eachLayer(function (layer) {
   var center = layer.getBounds().getCenter();
   var label = L.marker(center, {
-      icon: L.divIcon({
-          className: 'label2',
-          html: layer.feature.properties.admin1Name
-      })
+    icon: L.divIcon({
+      className: 'label2',
+      html: layer.feature.properties.admin1Name
+    })
   }).addTo(mapplot);
 });
 
