@@ -28,6 +28,7 @@ This online system will serve as a platform for all landowners to access their l
 ## Database
 ---
 
+![image info](./static/images/database.png)
 
 ## Workflow
 ---
