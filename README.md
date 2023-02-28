@@ -18,12 +18,12 @@ Usually, land ownwers could only check the information their thram in paper cert
 - Time/money-consuming for fields visits
 - Complex administrative process to get the single information
 
-Regarding this problem,  Cadastral Information System(CIS) was designed as an online platform for the landowners to select their thrams that would be visualized and displayed on a web map with geospatial technology and python in the cadastral mapping of Bhutan. Our main porposes are:
+Regarding this problem,  ***Cadastral Information System(CIS)*** was designed as an online platform for the landowners to select their thrams that would be visualized and displayed on a web map with geospatial technology and python in the cadastral mapping of Bhutan. Our main porposes are:
 - Land information
 - Decision making
 - Policy development and Information development
 
-To leverage the potential of ICTs for enhancing efficiency in government functioning for planning, policy, and decision-making and for most provide convenience to the landowner to easily access their land details online which otherwise the landowner must travel from far places of the country and visit Land office in person just to know the status of their piece of land.  
+To leverage the potential of ***Information and Communications Technology(ICTs)*** for enhancing efficiency in government functioning for planning, policy, and decision-making and for most provide convenience to the landowner to easily access their land details online which otherwise the landowner must travel from far places of the country and visit Land office in person just to know the status of their piece of land.  
 This online system will serve as a platform for all landowners to access their land information using their smartphone or computer from any part of the world without having to visit the land office.
 ## Database
 ---
