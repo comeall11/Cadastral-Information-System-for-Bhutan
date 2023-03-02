@@ -28,11 +28,11 @@ This online system will serve as a platform for all landowners to access their l
 ## Database
 ---
 
-![image info](./static/images/database.png)
+![image info](./static/images/database.jpeg)
 
 ## Workflow
 ---
-![image info](./static/images/workflow.jpg)
+![image info](./static/images/workflow.png)
 ## How to run this project
 ---
 ### 1. Install the Requirements (requirements.txt)
