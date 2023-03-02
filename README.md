@@ -65,10 +65,13 @@ The Python program will be designed to perform the following tasks:
 - Implement error handling to gracefully handle exceptions and errors that may occur during runtime.
 - Use **Flask_sqlalchemy** to manage the database schema and perform ***CRUD*** (Create, Read, Update, Delete) operations on the database.
 
-### 2. Run the ETL.py
+### 2. Run the createdb.py
+This program will create the empty database tables required in postgres.
+
+### 3. Run the ETL.py
 This program will connect to the source mariadb database and also to the postgres database which is the working database. After editing the database connection credentials, it will populate the data from the source database mariadb to postgres.
 
-### 3. Run the main.py
+### 4. Run the main.py
 Edit the database connection credentials and run the programme.
 
 
